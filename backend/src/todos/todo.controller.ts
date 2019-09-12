@@ -1,7 +1,10 @@
 import * as express from 'express';
 import Controller from '../interfaces/controller.interface';
+import TodoNotFoundException from '../exceptions/TodoNotFoundException';
+import validationMiddleware from '../middleware/validation.middleware';
 import Todo from './todo.interface';
-import todoModel from './todos.model';
+import todoModel from './todo.model';
+import CreateTodoDto from './todo.dto';
 
 class TodosController implements Controller {
     public path = '/todos';
@@ -17,7 +20,8 @@ class TodosController implements Controller {
         this.router.get(`${this.path}/:id`, this.getTodoById);
         this.router.put(`${this.path}/:id`, this.modifyTodo);
         this.router.delete(`${this.path}/:id`, this.deleteTodo);
-        this.router.todo(this.path, this.createTodo);
+        this.router.patch(`${this.path}/:id`, validationMiddleware(CreateTodoDto, true), this.modifyTodo);
+        this.router.post(this.path, validationMiddleware(CreateTodoDto), this.createTodo);
     }
 
     private getAllTodos = (request: express.Request, response: express.Response) => {
@@ -27,20 +31,28 @@ class TodosController implements Controller {
             });
     }
 
-    private getTodoById = (request: express.Request, response: express.Response) => {
+    private getTodoById = (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const id = request.params.id;
         this.todo.findById(id)
             .then((todo) => {
-                response.send(todo);
+                if (todo) {
+                    response.send(todo);
+                } else {
+                    next(new TodoNotFoundException(id));
+                }
             });
     }
 
-    private modifyTodo = (request: express.Request, response: express.Response) => {
+    private modifyTodo = (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const id = request.params.id;
         const todoData: Todo = request.body;
         this.todo.findByIdAndUpdate(id, todoData, { new: true })
             .then((todo) => {
-                response.send(todo);
+                if (todo) {
+                    response.send(todo);
+                } else {
+                    next(new TodoNotFoundException(id));
+                }
             });
     }
 
@@ -53,14 +65,14 @@ class TodosController implements Controller {
             });
     }
 
-    private deleteTodo = (request: express.Request, response: express.Response) => {
+    private deleteTodo = (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const id = request.params.id;
         this.todo.findByIdAndDelete(id)
             .then((successResponse) => {
                 if (successResponse) {
                     response.send(200);
                 } else {
-                    response.send(404);
+                    next(new TodoNotFoundException(id));
                 }
             });
     }
