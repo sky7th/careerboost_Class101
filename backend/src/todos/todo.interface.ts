@@ -1,5 +1,5 @@
 interface Todo {
-    author: string;
+    authorId: string;
     title: string;
     content: string;
 }

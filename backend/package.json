@@ -68,6 +68,7 @@
     "content-security-policy-builder": "^2.1.0",
     "content-type": "^1.0.4",
     "cookie": "^0.3.1",
+    "cookie-parser": "^1.4.4",
     "cookie-signature": "^1.0.6",
     "copy-descriptor": "^0.1.1",
     "core-util-is": "^1.0.2",
@@ -337,7 +338,11 @@
     "xtend": "^4.0.2",
     "yallist": "^3.0.3"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/bcrypt": "^3.0.0",
+    "@types/cookie-parser": "^1.4.2",
+    "@types/jsonwebtoken": "^8.3.3"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --watch src --delay 1 --exec ts-node ./src/server.ts"
