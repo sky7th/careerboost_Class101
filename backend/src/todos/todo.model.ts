@@ -2,7 +2,10 @@ import * as mongoose from 'mongoose';
 import Todo from './todo.interface';
 
 const todoSchema = new mongoose.Schema({
-    authorId: String,
+    author: {
+        ref: 'Todo',
+        type: mongoose.Schema.Types.ObjectId,
+    },
     content: String,
     title: String,
 });

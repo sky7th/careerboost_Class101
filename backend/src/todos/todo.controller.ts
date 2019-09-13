@@ -28,7 +28,8 @@ class TodosController implements Controller {
     }
 
     private getAllTodos = async (request: express.Request, response: express.Response) => {
-        const todos = await this.todo.find();
+        const todos = await this.todo.find()
+            .populate('author', '-password');
         response.send(todos);
     }
 
@@ -53,19 +54,20 @@ class TodosController implements Controller {
         }
     }
 
-    private createTodo = (request: RequestWithUser, response: express.Response) => {
-        const todoData: Todo = request.body;
+    private createTodo = async (request: RequestWithUser, response: express.Response) => {
+        const todoData: CreateTodoDto = request.body;
         const createdTodo = new this.todo({
             ...todoData,
             authorId: request.user._id
         });
-        const savedTodo = createdTodo.save();
+        const savedTodo = await createdTodo.save();
+        await savedTodo.populate('author', '-password').execPopulate();
         response.send(savedTodo);
     }
 
-    private deleteTodo = (request: express.Request, response: express.Response, next: express.NextFunction) => {
+    private deleteTodo = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const id = request.params.id;
-        const successResponse = this.todo.findByIdAndDelete(id);
+        const successResponse = await this.todo.findByIdAndDelete(id);
         if (successResponse) {
             response.send(200);
         } else {
