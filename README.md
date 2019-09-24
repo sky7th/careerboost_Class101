@@ -32,7 +32,7 @@ Web/ SPA To-Do List 구현
 ### 참가자
 * 김민강 [프로젝트](https://github.com/mkki/careerboost_Class101)
 * 이태화 [프로젝트]()
-* 이창권 [프로젝트]()
+* 이창권 [프로젝트](https://github.com/changgunyee/careerboost_Class101)
 * 조성동 [프로젝트]()
 * 박은영 [프로젝트]()
 * 심형도 [프로젝트]()
