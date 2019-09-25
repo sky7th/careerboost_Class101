@@ -5,13 +5,13 @@ import validationMiddleware from '../middleware/validation.middleware';
 import RequestWithUser from '../interfaces/requestWithUser.interface';
 import authMiddleware from '../middleware/auth.middleware';
 import Todo from './todo.interface';
-import todoModel from './todo.model';
+import TodoModel from './todo.model';
 import CreateTodoDto from './todo.dto';
 
 class TodosController implements Controller {
     public path = '/todos';
     public router = express.Router();
-    private todo = todoModel;
+    private todo = TodoModel;
 
     constructor() {
         this.initializeRoutes();
@@ -58,7 +58,7 @@ class TodosController implements Controller {
         const todoData: CreateTodoDto = request.body;
         const createdTodo = new this.todo({
             ...todoData,
-            authorId: request.user._id
+            author: request.user._id
         });
         const savedTodo = await createdTodo.save();
         await savedTodo.populate('author', '-password').execPopulate();

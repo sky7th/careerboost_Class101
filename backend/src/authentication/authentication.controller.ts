@@ -54,7 +54,11 @@ class AuthenticationController implements Controller {
             if (isPasswordMatching) {
                 user.password = undefined;
                 const tokenData = this.createToken(user);
-                response.setHeader('Set-Cookie', [this.createCookie(tokenData)]);
+                console.log(tokenData);
+                response.cookie('Authorization', tokenData.token, {
+                    httpOnly: true,
+                    maxAge: tokenData.expiresIn
+                });
                 response.send(user);
             } else {
                 next(new WrongCredentialsException());
@@ -65,7 +69,9 @@ class AuthenticationController implements Controller {
     }
 
     private loggingOut = (request: express.Request, response: express.Response) => {
-        response.setHeader('Set-Cookie', ['Authorization=;Max-age=0']);
+        response.cookie('Authorization', ';', {
+            maxAge: 0
+        });
         response.send(200);
     }
 
@@ -74,7 +80,7 @@ class AuthenticationController implements Controller {
     }
 
     private createToken(user: User): TokenData {
-        const expiresIn = 60 * 60; // an hour
+        const expiresIn = 60 * 60 * 24 * 7; // an hour
         const secret = process.env.JWT_SECRET;
         const dataStoredInToken: DataStoredInToken = {
             _id: user._id,

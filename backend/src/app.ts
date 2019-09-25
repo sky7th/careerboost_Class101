@@ -27,6 +27,15 @@ class App {
     private initializeMiddlewares() {
         this.app.use(bodyParser.json());
         this.app.use(cookieParser());
+        this.app.use(function(req, res, next) {
+          res.setHeader("Access-Control-Allow-Origin", 'http://127.0.0.1:3000');
+          res.setHeader(
+            "Access-Control-Allow-Headers",
+            "Origin, X-Requested-With, Content-Type, Accept, Cookie"
+          );
+          res.setHeader('Access-Control-Allow-Credentials', 'true');
+          next();
+        });
     }
 
     private initializeErrorHandling() {
