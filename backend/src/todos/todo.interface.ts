@@ -3,7 +3,7 @@ interface Todo {
     title: string;
     content: string;
     isCompleted: boolean;
-    category: string;
+    // category: string;
 }
 
 export default Todo;

@@ -56,6 +56,7 @@ class TodosController implements Controller {
 
     private createTodo = async (request: RequestWithUser, response: express.Response) => {
         const todoData: CreateTodoDto = request.body;
+        console.log(todoData);
         const createdTodo = new this.todo({
             ...todoData,
             author: request.user._id

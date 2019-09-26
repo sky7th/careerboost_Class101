@@ -9,7 +9,7 @@ const todoSchema = new mongoose.Schema({
     content: String,
     title: String,
     isCompleted: Boolean,
-    category: String
+    // category: String
 });
 
 const todoModel = mongoose.model<Todo & mongoose.Document>('Todo', todoSchema);

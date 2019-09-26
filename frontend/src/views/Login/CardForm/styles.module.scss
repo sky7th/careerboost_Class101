@@ -1,0 +1,13 @@
+.card {
+  min-width: 400px;
+  margin-bottom: 15px;
+  padding: 40px;
+  .form {
+    display: flex;
+    flex-direction: column;
+    .buttonWrapper {
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+}

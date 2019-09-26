@@ -10,8 +10,8 @@ class CreateTodoDto {
     @IsBoolean()
     public isCompleted: boolean;
 
-    @IsString()
-    public category: string;
+    // @IsString()
+    // public category: string;
 }
 
 export default CreateTodoDto;
