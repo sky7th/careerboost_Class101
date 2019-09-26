@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
-import { compose, withHandlers, withStateHandlers } from 'recompose';
+import { compose, withHandlers, withStateHandlers, withProps } from 'recompose';
 import { logOut } from '../../../api/authorization';
-import { logOutAction } from '../../../store/actions/user';
 import ProfileMenu, { Props } from './ProfileMenu';
 
 interface OuterProps {
@@ -12,9 +11,9 @@ interface OuterProps {
 const enhance = compose<Props, OuterProps>(
   inject('UserStore'),
   withProps(
-    ({ TodoStore }) => {
+    ({ UserStore }) => {
       return {
-        TodoStore: TodoStore
+        UserStore: UserStore
       }
     } 
   ),
@@ -35,7 +34,7 @@ const enhance = compose<Props, OuterProps>(
     onLogOut: ({ handleClose }) => () => {
       logOut()
         .then(() => {
-          TodoStore.logOutAction();
+          UserStore.logOutAction();
           handleClose();
         });
     },

@@ -1,6 +1,6 @@
 import { withFormik } from 'formik';
 import { inject, observer } from 'mobx-react';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, withProps } from 'recompose';
 import * as Yup from 'yup';
 import { register } from '../../../api/authorization';
 import RegistrationData from '../../../interfaces/user/RegistrationData';
@@ -21,7 +21,7 @@ const enhance = compose<Props, {}>(
     }
   ),
   withHandlers<RecomposeProps, {}>({
-    logIn: () => (userData: UserData) => {
+    logIn: ({ UserStore }) => (userData: UserData) => {
       UserStore.logInAction(userData);
     },
   }),

@@ -1,5 +1,5 @@
 import { inject, observer } from 'mobx-react';
-import { compose, lifecycle, withHandlers, withStateHandlers } from 'recompose';
+import { compose, lifecycle, withHandlers, withStateHandlers, withProps } from 'recompose';
 import { auth } from '../../api/authorization';
 import UserData from '../../interfaces/user/UserData';
 import App, { Props } from './App';

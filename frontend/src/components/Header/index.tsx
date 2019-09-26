@@ -1,5 +1,5 @@
 import { inject, observer } from 'mobx-react';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, withProps } from 'recompose';
 import { logOut } from '../../api/authorization';
 import Header, { Props } from './Header';
 

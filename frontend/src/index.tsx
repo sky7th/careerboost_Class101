@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { configure } from 'mobx';
 import { Provider } from 'mobx-react';
-import 'typeface-roboto';
 import App from './components/App';
 import UserStore from './store/UserStore';
 import * as serviceWorker from './serviceWorker';

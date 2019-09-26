@@ -1,0 +1,20 @@
+@import '../../../styles/breakpoints';
+
+.list.list {
+  padding: 0;
+  @include on('medium') {
+    padding: 8px 0;
+  }
+  .link {
+    text-decoration: none;
+    .item {
+      padding: 15px 25px;
+      &.isCurrentItem {
+        background-color: red;
+      }
+      .icon {
+        min-width: 15px;
+      }
+    }
+  }
+}

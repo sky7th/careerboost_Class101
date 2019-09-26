@@ -1,6 +1,6 @@
 import { withFormik } from 'formik';
 import { toast } from 'react-toastify';
-import { compose, withHandlers } from 'recompose';
+import { compose, withHandlers, withProps } from 'recompose';
 import * as Yup from 'yup';
 import { addTodo } from '../../../api/todos';
 import CreateTodoData from '../../../interfaces/todo/CreateTodoData';
@@ -13,7 +13,7 @@ interface RecomposeProps extends Props {
   addTodoDispatcher: (createTodoData: CreateTodoData) => void;
 }
 
-const enhance = compose<Props, {}>(
+const enhance = compose<Props, {}>( 
   inject('UserStore'),
   withProps(
     ({ TodoStore }) => {

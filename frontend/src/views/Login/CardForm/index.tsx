@@ -1,11 +1,10 @@
 import { withFormik } from 'formik';
-import { inject, observer } from 'mobx-react;
-import { compose, withHandlers } from 'recompose';
+import { inject, observer } from 'mobx-react';
+import { compose, withHandlers, withProps } from 'recompose';
 import * as Yup from 'yup';
 import { logIn } from '../../../api/authorization';
 import LoginData from '../../../interfaces/user/LoginData';
 import UserData from '../../../interfaces/user/UserData';
-import { logInAction } from '../../../store/actions/user';
 import CardForm, { Props } from './CardForm';
 
 interface RecomposeProps extends Props {
@@ -14,9 +13,16 @@ interface RecomposeProps extends Props {
 
 const enhance = compose<Props, {}>(
   inject('UserStore'),
+  withProps(
+    ({ UserStore }) => {
+      return {
+        UserStore: UserStore
+      }
+    } 
+  ),
   withHandlers<RecomposeProps, {}>({
-    logInDispatcher: () => (userData: UserData) => {
-      logInAction(userData);
+    logInDispatcher: ({ UserStore }) => (userData: UserData) => {
+      UserStore.logInAction(userData);
     },
   }),
   withFormik<RecomposeProps, LoginData>({

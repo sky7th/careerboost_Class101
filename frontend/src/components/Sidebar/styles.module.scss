@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.wrapper {
+  z-index: 10;
+  min-width: 225px;
+  height: 100%;
+  .paper {
+    position: initial;
+  }
+  .container {
+    height: 100%;
+  }
+}
+
+.containerMobile.containerMobile {
+  z-index: 1;
+  top: $header-height;
+  > div {
+    top: $header-height;
+  }
+}

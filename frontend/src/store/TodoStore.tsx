@@ -28,7 +28,7 @@ export default class TodoStore {
       case 'completed': return this.completedTodos;
       case 'pending': return this.pendingTodos;
       default: throw new Error('type is `never` here, but have to return or throw');
-    }
+    } 
   }
 
   @action addTodoAction = (text: string): void => {
