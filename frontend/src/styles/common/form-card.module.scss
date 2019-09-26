@@ -1,0 +1,24 @@
+.formCard {
+  min-width: 100px;
+  padding: 5px;
+
+  .form {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    .formInputTitle {
+      margin-right: 10px;
+      width: 50%;
+    }
+    .formInputContent {
+      margin-right: 10px;
+      width: 50%;
+    }
+    .buttonWrapper {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      height: 30px;
+    }
+  }
+}

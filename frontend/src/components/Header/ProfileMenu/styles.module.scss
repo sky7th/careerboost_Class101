@@ -1,0 +1,18 @@
+@import '../../../styles/variables';
+
+.name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding-left: 10px;
+  text-transform: none;
+}
+
+.icon {
+  color: $dark-gray;
+}
+
+.menu > div {
+  margin-top: 20px;
+}

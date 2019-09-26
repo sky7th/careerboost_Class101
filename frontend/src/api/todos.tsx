@@ -1,23 +1,23 @@
 import axios from 'axios';
-import CreatePostData from '../interfaces/todo/CreateTodoData';
-import PostData from '../interfaces/todo/TodoData';
+import CreateTodoData from '../interfaces/todo/CreateTodoData';
+import TodoData from '../interfaces/todo/TodoData';
 
 const PATH = 'http://127.0.0.1:5000/todos';
 
-export function fetchPosts() {
+export function fetchTodos() {
   return axios.get(
     PATH,
   )
     .then(response => response.data);
 }
 
-export function addPost(createPostData: CreatePostData) {
+export function addTodo(createTodoData: CreateTodoData) {
   return axios.post(
     PATH,
-    createPostData,
+    createTodoData,
     {
       withCredentials: true,
     },
   )
-    .then(response => response.data as PostData);
+    .then(response => response.data as TodoData);
 }
