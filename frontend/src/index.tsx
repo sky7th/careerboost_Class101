@@ -1,17 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { configure } from 'mobx';
-import { Provider } from 'mobx-react';
+import 'typeface-roboto';
 import App from './components/App';
-import UserStore from './store/UserStore';
 import * as serviceWorker from './serviceWorker';
+import './styles/styles.scss';
+import { Provider } from 'mobx-react';
+import UserStore from './store/UserStore';
+import TodoStore from './store/TodoStore';
+import validateEnv from './utils/validateEnv';
 
-configure({
-  enforceActions: true,
-});
+validateEnv();
+
+const userState = new UserStore();
+const todoState = new TodoStore();
 
 ReactDOM.render(
-  <Provider store={UserStore}>
+  <Provider userStore={userState} todoStore={todoState}>
     <App />
   </Provider>,
   document.getElementById('root'),

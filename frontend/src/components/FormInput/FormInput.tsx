@@ -8,20 +8,19 @@ import styles from './styles.module.scss';
 
 export interface Props {
   name: string;
-  label: string;
+  label?: string;
   value: string;
-  onChange: () => Event;
-  error: string;
-  touched: boolean;
-  type: string;
-  hasError: boolean;
+  onChange: any;
+  error: any;
+  touched: any;
+  type?: string;
 }
 
 const FormInput: FunctionComponent<Props> = ({
- name, label, value, onChange, error, touched, type, hasError,
+ name, label, value, onChange, error, touched, type,
 }) => (
-  <FormControl error={hasError}>
-    <InputLabel htmlFor={name}>{label}</InputLabel>
+  <FormControl error={Boolean(error) && touched}>
+    <InputLabel htmlFor={name}>{label || name}</InputLabel>
     <Input
       type={type}
       id={name}
@@ -31,7 +30,7 @@ const FormInput: FunctionComponent<Props> = ({
     />
     <FormHelperText
       id={`component-error-${name}`}
-      className={hasError ? '' :  styles.helperWithoutError}
+      className={Boolean(error) && touched ? '' :  styles.helperWithoutError}
     >
       {error}
     </FormHelperText>

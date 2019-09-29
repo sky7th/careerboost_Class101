@@ -16,20 +16,20 @@ const render = (
   redirectToWhenInaccessible: string,
 ) =>
   (props: RouteComponentProps) =>
-    (
-      isAccessible
-        ? <Component {...props} />
-        : <Redirect to={{ pathname: redirectToWhenInaccessible }} />
-    );
+(
+  isAccessible
+  ? <Component {...props} />
+  : <Redirect to={{ pathname: redirectToWhenInaccessible }} />
+);
 
 const ProtectedRoute: FunctionComponent<Props> = ({
   component, isAccessible, redirectToWhenInaccessible, exact, path,
 }) => (
-    <Route
-      path={path}
-      exact={exact}
-      render={render(isAccessible, component, redirectToWhenInaccessible)}
-    />
-  );
+  <Route
+    path={path}
+    exact={exact}
+    render={render(isAccessible, component, redirectToWhenInaccessible)}
+  />
+);
 
 export default ProtectedRoute;
