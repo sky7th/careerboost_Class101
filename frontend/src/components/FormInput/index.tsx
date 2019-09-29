@@ -1,4 +1,3 @@
-import { compose, withProps } from 'recompose';
-import FormInput, { Props } from './FormInput';
+import FormInput from './FormInput';
 
 export default FormInput;

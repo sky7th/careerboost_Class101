@@ -1,4 +1,4 @@
-import { faFileAlt, faFolderPlus, faUserAlt } from '@fortawesome/free-solid-svg-icons';
+import { faFileAlt } from '@fortawesome/free-solid-svg-icons';
 import { compose, withProps } from 'recompose';
 import Content, { Props } from './Content';
 

@@ -1,5 +1,5 @@
 import TodoData from '../interfaces/todo/TodoData';
-import { observable, computed, action, toJS } from 'mobx';
+import { observable, computed, action } from 'mobx';
 import { fetchTodos, addTodoApi, deleteTodoApi } from '../api/todos';
 import UserData from '../interfaces/user/UserData';
 import CreateTodoData from '../interfaces/todo/CreateTodoData';

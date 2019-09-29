@@ -18,7 +18,7 @@ class TodosController implements Controller {
     }
 
     private initializeRoutes() {
-        this.router.get(this.path, this.getAllTodos);
+        this.router.get(`${this.path}/byUser/:id`, this.getAllTodosByUser);
         this.router.get(`${this.path}/:id`, this.getTodoById);
         this.router
             .all(`${this.path}/*`, authMiddleware)
@@ -27,8 +27,9 @@ class TodosController implements Controller {
             .post(this.path, authMiddleware, validationMiddleware(CreateTodoDto), this.createTodo);
     }
 
-    private getAllTodos = async (request: express.Request, response: express.Response) => {
-        const todos = await this.todo.find()
+    private getAllTodosByUser = async (request: express.Request, response: express.Response) => {
+        const userId = request.params.id;
+        const todos = await this.todo.find({ author: userId })
             .populate('author', '-password');
         response.send(todos);
     }
@@ -68,6 +69,7 @@ class TodosController implements Controller {
 
     private deleteTodo = async (request: express.Request, response: express.Response, next: express.NextFunction) => {
         const id = request.params.id;
+        console.log(id);
         const successResponse = await this.todo.findByIdAndDelete(id);
         if (successResponse) {
             response.send(200);

@@ -1,3 +1,3 @@
-import Dashboard, { Props } from './Dashboard';
+import Dashboard from './Dashboard';
 
 export default Dashboard;

@@ -39,7 +39,7 @@ export function logIn(loginData: LoginData) {
 
 export function logOut() {
   return axios.post(
-    `${PATH}/logout`,
+    `${process.env.SERVER_API_URL}/logout`,
     null,
     {
       withCredentials: true,

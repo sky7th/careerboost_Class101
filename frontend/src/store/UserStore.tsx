@@ -1,5 +1,4 @@
-import { observable, computed, action, toJS } from 'mobx';
-import { asyncAction } from 'mobx-utils';
+import { observable, computed, action } from 'mobx';
 import LoginData from '../interfaces/user/LoginData';
 import UserData from '../interfaces/user/UserData';
 import RegistrationData from '../interfaces/user/RegistrationData';

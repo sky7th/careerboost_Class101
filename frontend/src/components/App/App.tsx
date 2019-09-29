@@ -15,9 +15,6 @@ interface AppProps {
 @inject('userStore')
 @observer
 class App extends React.Component<AppProps, {}> {
-  constructor(props: {}) {
-    super(props);
-  }
 
   public render() {
     const isLoggedIn = (this.props.userStore as UserStore).isLoggedIn;

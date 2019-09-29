@@ -1,8 +1,10 @@
-import React from 'react';
-import FormInput from '../../../components/FormInput';
+import React, { FunctionComponent } from 'react';
+import FormInput from '../../FormInput';
 import styles from '../../../styles/common/form-card.module.scss';
 import { toast } from 'react-toastify';
 import Button from '@material-ui/core/Button';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
 import { Formik } from 'formik';
 import { observer, inject } from 'mobx-react';
 import TodoStore from '../../../store/TodoStore';

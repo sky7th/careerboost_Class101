@@ -23,7 +23,7 @@ const Sidebar: FunctionComponent<Props> = ({ location, onToggleDrawer }) => (
         <Content currentPath={location.pathname} onLinkClick={onToggleDrawer}/>
       </Drawer>
     </Hidden>
-    <Hidden xsDown implementation="css" className={styles.container}>
+    <Hidden xsDown implementation="css">
       <Drawer
         classes={{
           paper: styles.paper,

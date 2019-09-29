@@ -4,10 +4,8 @@ import View from '../../components/View';
 import TodoData from '../../interfaces/todo/TodoData';
 import TodoCard from './TodoCard';
 import styles from './styles.module.scss';
-
 import UserData from '../../interfaces/user/UserData';
 import { observer, inject } from 'mobx-react';
-import { toJS } from 'mobx';
 import  UserStore from '../../store/UserStore';
 import  TodoStore from '../../store/TodoStore';
 
