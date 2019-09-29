@@ -1,13 +1,13 @@
+import 'dotenv/config';
 import axios from 'axios';
 import LoginData from '../interfaces/user/LoginData';
 import RegistrationData from '../interfaces/user/RegistrationData';
 import UserData from '../interfaces/user/UserData';
 
-const PATH = 'http://127.0.0.1:5000/auth';
 
 export function register(registrationData: RegistrationData) {
   return axios.post(
-    `${PATH}/register`,
+    `${process.env.SERVER_API_URL}/auth/register`,
     registrationData,
     {
       withCredentials: true,
@@ -18,7 +18,7 @@ export function register(registrationData: RegistrationData) {
 
 export function auth() {
   return axios.get(
-    PATH,
+    `${process.env.SERVER_API_URL}/auth`,
     {
       withCredentials: true,
     },
@@ -28,7 +28,7 @@ export function auth() {
 
 export function logIn(loginData: LoginData) {
   return axios.post(
-    `${PATH}/login`,
+    `${process.env.SERVER_API_URL}/auth/login`,
     loginData,
     {
       withCredentials: true,

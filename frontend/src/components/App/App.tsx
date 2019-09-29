@@ -1,20 +1,36 @@
-import React, { FunctionComponent } from 'react';
+import * as React from 'react';
 import { BrowserRouter } from 'react-router-dom';
+import Dashboard from '../../views/Dashboard';
+import LogIn from '../../views/LogIn';
+import Registration from '../../views/Registration';
 import Layout from '../Layout';
 import ProtectedRoute from '../ProtectedRoute';
-import LogIn from '../../views/LogIn';
-import Registration from '../../views/Registeration';
+import { observer, inject } from 'mobx-react';
+import  UserStore from '../../store/UserStore';
 
-export interface Props {
-  isLoggedIn: boolean;
-  isLoading: boolean;
+interface AppProps {
+  userStore?: UserStore;
 }
 
-const App: FunctionComponent<Props> = ({ isLoggedIn, isLoading }) => (
-  <BrowserRouter>
-    {!isLoading &&
-      (
+@inject('userStore')
+@observer
+class App extends React.Component<AppProps, {}> {
+  constructor(props: {}) {
+    super(props);
+  }
+
+  public render() {
+    const isLoggedIn = (this.props.userStore as UserStore).isLoggedIn;
+    return (<BrowserRouter>
+      {
         <Layout isLoggedIn={isLoggedIn}>
+          <ProtectedRoute
+            path="/"
+            isAccessible={isLoggedIn}
+            redirectToWhenInaccessible="/login"
+            component={Dashboard}
+            exact
+          />
           <ProtectedRoute
             path="/registration"
             isAccessible={!isLoggedIn}
@@ -30,9 +46,11 @@ const App: FunctionComponent<Props> = ({ isLoggedIn, isLoading }) => (
             exact
           />
         </Layout>
-      )
-    }
-  </BrowserRouter>
-);
+
+      }
+    </BrowserRouter>
+    );
+  }
+}
 
 export default App;

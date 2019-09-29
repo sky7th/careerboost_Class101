@@ -1,25 +1,51 @@
-import { observable, computed, action } from 'mobx';
+import { observable, computed, action, toJS } from 'mobx';
+import { asyncAction } from 'mobx-utils';
 import LoginData from '../interfaces/user/LoginData';
 import UserData from '../interfaces/user/UserData';
-import { logIn } from '../api/authorization';
+import RegistrationData from '../interfaces/user/RegistrationData';
+import { logIn, logOut, register } from '../api/authorization';
 
-export default class TodoStore {
+export default class UserStore {
   @observable public isLoggedIn: boolean;
-  @observable public userData: UserData | undefined;
+  @observable public loginUser: UserData;
 
   constructor() {
     this.isLoggedIn = false;
-    this.userData = undefined;
+    this.loginUser = {
+      _id: '',
+      name: '',
+      email: '',
+    };
   }
-
-  @action public logInAction = async (loginData: LoginData) => {
-    const userData = await logIn(loginData);
+  @computed
+  public get loginUserInfo(): UserData {
+    return this.loginUser;
+  }
+  @action
+  public logInAction = async (loginData: LoginData) => {
+    const loginUser: UserData = await logIn(loginData);
+    this.loginUser = loginUser;
     this.isLoggedIn = true;
-    this.userData = userData;
   }
-
-  @action public logOutAction = (): void => {
+  @action
+  public logOutAction = async () => {
+    await logOut();
     this.isLoggedIn = false;
-    this.userData = undefined;
+    this.loginUser = {
+      _id: '',
+      name: '',
+      email: '',
+    };
+  }
+  @action
+  public registerAction = async (registrationData: RegistrationData) => {
+    await register(registrationData);
+    const loginData = {
+      email: registrationData.email,
+      password: registrationData.password,
+    };
+    const loginUser: UserData = await logIn(loginData);
+    this.loginUser = loginUser;
+    this.isLoggedIn = true;
   }
 }

@@ -1,23 +1,36 @@
 import axios from 'axios';
 import CreateTodoData from '../interfaces/todo/CreateTodoData';
 import TodoData from '../interfaces/todo/TodoData';
+import UserData from '../interfaces/user/UserData';
 
-const PATH = 'http://127.0.0.1:5000/todos';
-
-export function fetchTodos() {
+export function fetchTodos(loginUser: UserData) {
   return axios.get(
-    PATH,
+    `${process.env.SERVER_API_URL}/todos/byUser/${loginUser._id}`,
   )
     .then(response => response.data);
 }
 
-export function addTodo(createTodoData: CreateTodoData) {
+export function addTodoApi(createTodoData: CreateTodoData) {
   return axios.post(
-    PATH,
+    `${process.env.SERVER_API_URL}/todos`,
     createTodoData,
     {
       withCredentials: true,
     },
   )
     .then(response => response.data as TodoData);
+}
+
+export function deleteTodoApi(todoId: string) {
+  console.log('제발');
+  return axios.delete(
+    `${process.env.SERVER_API_URL}/todos/${todoId}`,
+    {
+      withCredentials: true,
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    },
+  )
+    .then(response => response.data);
 }
