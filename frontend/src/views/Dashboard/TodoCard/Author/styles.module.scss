@@ -1,0 +1,34 @@
+$size: 40px;
+
+.chip.chip {
+  width: 130px;
+  height: $size;
+  border-radius: $size;
+  position: relative;
+  top: $size / 2;
+  background-color: white;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.08),
+  0 4px 5px 0 rgba(0, 0, 0, 0.03),
+  0 1px 10px 0 rgba(0, 0, 0, 0.03);
+  .avatar {
+    margin-right: auto;
+    background-color: white;
+    width: $size;
+    height: $size;
+    .gradient {
+      width: 0;
+      height: 0;
+    }
+    .icon {
+      width: 100%;
+      height: 100%;
+      path {
+        fill: url(#avatar-gradient) gray;
+      }
+    }
+  }
+  .label {
+    width: 100%;
+    overflow: hidden;
+  }
+}

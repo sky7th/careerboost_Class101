@@ -5,18 +5,16 @@ import Content from './Content';
 import styles from './styles.module.scss';
 
 export interface Props {
-  isDrawerOpened: boolean;
   location: Location;
   onToggleDrawer: () => void;
 }
 
-const Sidebar: FunctionComponent<Props> = ({ isDrawerOpened, location, onToggleDrawer }) => (
+const Sidebar: FunctionComponent<Props> = ({ location, onToggleDrawer }) => (
   <Fragment>
     <Hidden smUp implementation="css">
       <Drawer
         variant="temporary"
         anchor="top"
-        open={isDrawerOpened}
         classes={{
           paper: styles.paper,
         }}
@@ -31,7 +29,6 @@ const Sidebar: FunctionComponent<Props> = ({ isDrawerOpened, location, onToggleD
           paper: styles.paper,
         }}
         variant="permanent"
-        open
         className={styles.wrapper}
       >
         <Content currentPath={location.pathname} />

@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  height: 100%;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  .wrapper {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+}
