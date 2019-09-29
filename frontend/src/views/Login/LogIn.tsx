@@ -7,7 +7,7 @@ const LogIn: FunctionComponent = () => (
   <View>
     <CardForm />
     <Link to="/registration">
-      Don't have an account?
+      회원가입
     </Link>
   </View>
 );

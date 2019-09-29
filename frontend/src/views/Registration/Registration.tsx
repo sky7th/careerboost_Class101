@@ -7,7 +7,7 @@ const Registration: FunctionComponent = () => (
   <View>
     <CardForm />
     <Link to="/login">
-      Already have an account?
+      로그인 화면
     </Link>
   </View>
 );
